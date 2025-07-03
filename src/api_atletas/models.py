@@ -1,7 +1,10 @@
 import sqlalchemy
+from src.api_atletas.contrib.mapper import BaseModel
 
-
-class AtletaModel(sqlalchemy.Model):
+#esta classe representa a tabela de atletas no banco de dados
+#e herda de BaseModel, que define o id como chave primária e auto-incrementável
+#as colunas são definidas com tipos e restrições apropriadas
+class AtletaModel(BaseModel):
     __tablename__ = "atletas"
 
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
