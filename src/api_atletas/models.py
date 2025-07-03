@@ -1,4 +1,5 @@
 import sqlalchemy
+from sqlalchemy.orm import Mapped
 from src.api_atletas.contrib.mapper import BaseModel
 
 #esta classe representa a tabela de atletas no banco de dados
@@ -7,10 +8,15 @@ from src.api_atletas.contrib.mapper import BaseModel
 class AtletaModel(BaseModel):
     __tablename__ = "atletas"
 
-    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True, autoincrement=True)
-    nome = sqlalchemy.Column(sqlalchemy.String(length=50), nullable=False)
-    cpf = sqlalchemy.Column(sqlalchemy.String(length=11), nullable=False, unique=True)
-    idade = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
-    peso = sqlalchemy.Column(sqlalchemy.Float, nullable=False)
-    altura = sqlalchemy.Column(sqlalchemy.Float, nullable=False)
-    sexo = sqlalchemy.Column(sqlalchemy.String(length=1), nullable=False)
+    id = Mapped[sqlalchemy.Integer] = sqlalchemy.Column(
+        sqlalchemy.Integer, primary_key=True, autoincrement=True, unique=True, nullable=False
+    )
+    nome = Mapped[sqlalchemy.String(length=50)] = sqlalchemy.Column(sqlalchemy.String(length=50), nullable=False)
+    cpf = Mapped[sqlalchemy.String(length=11)] = sqlalchemy.Column(sqlalchemy.String(length=11), nullable=False, unique=True)
+    idade = Mapped[sqlalchemy.Integer] = sqlalchemy.Column(sqlalchemy.Integer, nullable=False)
+    peso = Mapped[sqlalchemy.Float] = sqlalchemy.Column(sqlalchemy.Float, nullable=False)
+    altura = Mapped[sqlalchemy.Float] = sqlalchemy.Column(sqlalchemy.Float, nullable=False)
+    sexo = Mapped[sqlalchemy.String(length=1)] = sqlalchemy.Column(sqlalchemy.String(length=1), nullable=False)
+    data_criacao = Mapped[sqlalchemy.DateTime] = sqlalchemy.Column(
+        sqlalchemy.DateTime, default=sqlalchemy.func.now(), nullable=False
+    )
