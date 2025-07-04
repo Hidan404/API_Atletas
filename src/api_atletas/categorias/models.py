@@ -3,7 +3,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, String
 import sqlalchemy
 
-from api_atletas.atletas.models import AtletaModel
+from src.api_atletas.atletas.models import AtletaModel
 
 
 
