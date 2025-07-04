@@ -14,7 +14,7 @@ class AtletaModel(BaseModel):
         primary_key=True, autoincrement=True, unique=True, nullable=False
     )
     nome: Mapped[str] = mapped_column(sqlalchemy.String(50), nullable=False)
-    cpf: Mapped[str] = mapped_column(sqlalchemy.String(11), nullable=False, unique=True)
+    cpf: Mapped[str] = mapped_column(sqlalchemy.String(11), unique=True, nullable=False)
     idade: Mapped[int] = mapped_column(nullable=False)
     peso: Mapped[float] = mapped_column(nullable=False)
     altura: Mapped[float] = mapped_column(nullable=False)
@@ -24,3 +24,9 @@ class AtletaModel(BaseModel):
     )
     categoria: Mapped["CategoriaModel"] = relationship( back_populates="atletas")
     categoria_id: Mapped[int] = mapped_column(sqlalchemy.ForeignKey("categorias.id"), nullable=False)
+    centro_treinamento: Mapped["CTModel"] = relationship(
+        back_populates="atletas", uselist=False, cascade="all, delete-orphan"
+    )
+    centro_treinamento_id: Mapped[int] = mapped_column(
+        sqlalchemy.ForeignKey("centros_treinamento.id"), nullable=True
+    )
